@@ -65,7 +65,7 @@ section {
 .hero {
   position: relative; /* Needed for overlay */
   /* Hero image (provided by user) */
-  background-image: url('https://cdn2.dropmarkusercontent.com/52043/381a7139a1d684fa8c2323808fc11cd91b9a8bedeb058e9267440c693e1e9f11/preview/Madagascar_2019_CG-2679.jpg?Expires=1760828430&Signature=GtEOoZAB4~0Zm-7dhNvOTuHG2brSNnFckHFhVgoTRaNVTc7w7kCi1WCBi7yIrwRntHyRobFa8AwV3~UrXSerDqZqb~LfCVSF9kR2JwTpsCOeTFUZTzq-POFoLWBJ5ZYPeLVgTAEKJHv9Tl6outDldzAbPJjYtmG7KG44z-k9WJoI8ndEijc7y33xa22r3z2fllYBwO1b9UJDOif~xCmHmq1c5WogjGG98u9NOw0nBWNUl0ZEssUHEOcTrC3Ocn8JZ8-MjJ7bVoEQ-wZbLYaYue9ebzquYyxonL5M8-RpOHYOVrd35cmee3u3U3QPTigMRqgEEIgfh1NoyfF7n7guHg__&Key-Pair-Id=APKAITQYWVEN757ZA4KQ');
+  background-image: url('https://charitywater.dropmark.com/993072/26804796.jpg');
   /* Show the entire image without cropping where possible */
   /* Scale the background image very large vertically to make it appear much larger */
     background-size: cover;
