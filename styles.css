@@ -23,20 +23,40 @@ Fonts:
   This CSS uses the provided color palette and beginner-friendly styles.
 */
 
+/* Brand variables: only using #2E9DF7 (blue) and #FFC907 (yellow) per request */
+:root{
+  --brand-blue: #2E9DF7; /* primary blue */
+  --brand-yellow: #FFC907; /* primary yellow accent */
+  --bg: #ffffff; /* neutral background kept white for readability */
+  --text: #222222; /* neutral dark text */
+}
+
+/* Container inside hero to hold title/subtitle and keep them together on the right */
+.hero-content{
+  max-width: 900px;
+  padding: 20px 0 0 20px; /* remove right padding so content can reach the edge */
+  display: flex;
+  flex-direction: column;   /* stack h1 above p */
+  align-items: flex-end;    /* align children to the far right */
+  justify-content: flex-start;  /* place contents at the top of the container */
+  padding-top: 16px; /* reduce top padding to lift content */
+}
+
 /* Set up the main font and background color for the whole page */
 body {
-  background-color: #f4f8fb; /* Soft light blue for a fresh look */
-  font-family: 'Avenir', 'Proxima Nova', Arial, sans-serif;
+  background-color: var(--bg);
+  /* Proxima Nova preferred, fall back to system fonts */
+  font-family: 'Proxima Nova', Avenir, 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #222;
+  color: var(--text);
 }
 
 /* Add a slight shadow and rounded corners to each section for depth */
 section {
   background: #fff; /* White background for sections */
   border-radius: 12px; /* Rounded corners */
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft blue shadow */
+  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.07); /* Soft blue shadow - kept low-opacity neutral */
   margin: 24px 10px; /* Space between sections */
   padding: 24px 16px;
 }
@@ -44,59 +64,111 @@ section {
 /* Hero Section Styles */
 .hero {
   position: relative; /* Needed for overlay */
-  /* Set a background image that covers the whole section */
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
-  background-size: cover;      /* Make the image cover the whole area */
-  background-position: center; /* Center the image */
+  /* Hero image (provided by user) */
+  background-image: url('https://cdn2.dropmarkusercontent.com/52043/381a7139a1d684fa8c2323808fc11cd91b9a8bedeb058e9267440c693e1e9f11/preview/Madagascar_2019_CG-2679.jpg?Expires=1760828430&Signature=GtEOoZAB4~0Zm-7dhNvOTuHG2brSNnFckHFhVgoTRaNVTc7w7kCi1WCBi7yIrwRntHyRobFa8AwV3~UrXSerDqZqb~LfCVSF9kR2JwTpsCOeTFUZTzq-POFoLWBJ5ZYPeLVgTAEKJHv9Tl6outDldzAbPJjYtmG7KG44z-k9WJoI8ndEijc7y33xa22r3z2fllYBwO1b9UJDOif~xCmHmq1c5WogjGG98u9NOw0nBWNUl0ZEssUHEOcTrC3Ocn8JZ8-MjJ7bVoEQ-wZbLYaYue9ebzquYyxonL5M8-RpOHYOVrd35cmee3u3U3QPTigMRqgEEIgfh1NoyfF7n7guHg__&Key-Pair-Id=APKAITQYWVEN757ZA4KQ');
+  /* Show the entire image without cropping where possible */
+  /* Scale the background image very large vertically to make it appear much larger */
+    background-size: cover;
+  /* Keep image centered horizontally, align toward the top so important parts are visible */
+    background-position: center 35%;
+  align-self: flex-end; /* pin headline to the far right within .hero-content */
   background-repeat: no-repeat;
-  color: #fff;                 /* White text for contrast */
-  text-align: center;          /* Center the text */
+  
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* push content to the right */
+  text-align: right;          /* align inline text to the right */
   padding: 60px 20px;          /* Add space above and below */
+    min-height: 100vh;          /* Fill the viewport height so the subject is prominent */
   border-radius: 0 0 16px 16px; /* Only round bottom corners */
 
-  /* Add a dark overlay for better text readability */
-  /* This uses a simple linear-gradient overlay */
-  background-blend-mode: darken;
-  background-color: rgba(46, 157, 247, 0.45); /* Blue overlay */
+  /* Add a dark gradient overlay for better text readability */
+  position: relative;
+  z-index: 1;
+}
+
+/* Add a dark overlay for better text readability */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(13,38,54,0.5), rgba(13,38,54,0.7));
+  z-index: 0;
 }
 
 /* Make the headline bold and modern */
 .hero h1 {
-  font-size: 2.5em;
-  font-weight: bold;
+  font-size: 2.05em;
+  font-weight: 700; /* bold */
+  color: #2e9df7; /* brand blue for headline */
   letter-spacing: 1px;
   margin-bottom: 15px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15); /* Soft shadow for readability */
+  /* text-shadow removed */
+  text-align: center; /* center align */
+  position: relative; /* relative positioning */
+  z-index: 2; /* ensure text stays above overlay */
+  top: -130px; /* nudge up by 100px */
 }
 
 /* Style the subheadline */
 .hero p {
-  font-size: 1.2em;
+  font-size: 1.5em;
   margin-top: 0;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.12);
+  color: #ffc907;
+  font-weight: 400; /* regular weight for better readability */
+  max-width: 600px;
+  text-align: center; /* center align */
+  position: relative; /* relative positioning */
+  z-index: 2; /* ensure text stays above overlay */
+  text-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  opacity: 0.9; /* slightly transparent for visual hierarchy */
+  top: -80px; /* align with h1 position */
+  word-break: break-word; /* wrap text if needed */
+  white-space: normal; /* allow wrapping */
+}
+
+/* Logo placed inside the hero in the bottom-right corner */
+.hero .hero-logo{
+  position: absolute;
+  right: 80px;
+  bottom: 100px;
+  top: -100 px; /* nudge up to align better with text */
+  width: 172px; /* increased ~30% from 132px */
+  height: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.12));
+  transform: translateX(-175px); /* nudge left by additional 15px (total -175px) */
 }
 
 /* Story Section Styles */
 .story {
-  background-color: #8BD1CB; /* Secondary Light Blue */
-  color: #222;
+  background-color: var(--brand-blue); /* Use brand blue for story background */
+  color: #fff;
   text-align: center;
   padding: 30px 20px;
 }
 
 /* Add accent color to section headings */
 h2 {
-  color: #2E9DF7; /* Primary blue */
+  color: var(--brand-blue);
   margin-top: 0;
   font-weight: bold;
 }
 
 /* Call-to-Action Section Styles */
 .call-to-action {
-  background-color: #FFC907; /* Primary Yellow */
-  color: #222;
+  background-color: var(--brand-yellow); /* Primary accent */
+  color: var(--text);
   text-align: center;
   padding: 30px 20px;
+}
+
+/* Ensure paragraph text in CTA is white on yellow background */
+.call-to-action p{
+  color: #ffffff;
 }
 
 /* Style the impact story image */
@@ -105,21 +177,40 @@ h2 {
   max-width: 320px;
   border-radius: 10px;
   margin-bottom: 16px;
-  box-shadow: 0 2px 8px rgba(46, 157, 247, 0.10);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Impact Section Styles: blue background with white content card */
+.impact-story{
+  background: var(--brand-blue);
+  color: #fff;
+}
+.impact-story h2{
+  color: #fff; /* override global h2 color so it stays readable on blue */
+  text-align: center;
+}
+.impact-content{
+  background: #ffffff; /* white inner space */
+  color: var(--text);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  max-width: 900px;
+  margin: 0 auto; /* center the card */
 }
 
 /* Donate Button Styles */
 .donate-button {
   display: inline-block;
-  background-color: #4FCB53; /* Green */
-  color: #fff;
+  background-color: var(--brand-blue); /* Use brand blue for CTA */
+  color: white;
   padding: 14px 32px;
   text-decoration: none;
   border-radius: 6px;
   font-weight: bold;
   font-size: 1.1em;
   margin-top: 18px;
-  box-shadow: 0 2px 8px rgba(79, 203, 83, 0.10);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: background 0.3s, transform 0.2s;
   border: none;
   cursor: pointer;
@@ -127,7 +218,8 @@ h2 {
 
 /* Change button color when hovered */
 .donate-button:hover {
-  background-color: #159A48; /* Dark Green */
+  /* Darker blue for hover */
+  background-color: #1a7dc4;
   transform: translateY(-2px) scale(1.04); /* Slight lift */
 }
 
@@ -158,6 +250,14 @@ section {
   /* Make subheadline font size smaller */
   .hero p {
     font-size: 1em;
+  }
+
+  /* Scale the hero logo down on phones so it doesn't obstruct content */
+  .hero .hero-logo{
+    width: 125px; /* ~30% larger (96 * 1.3) on small screens */
+    right: 10px;
+    bottom: 8px;
+    transform: translateX(-135px); /* increased left nudge on small screens */
   }
 
   /* Make story and call-to-action sections have less padding */
